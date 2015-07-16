@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &152798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 450128}
+  - 114: {fileID: 11414568}
+  - 23: {fileID: 2381566}
+  - 33: {fileID: 3343586}
+  - 114: {fileID: 11449068}
+  - 114: {fileID: 11419150}
+  m_Layer: 0
+  m_Name: Bottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &450128
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!23 &2381566
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152798}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: a2079d6498b7ec14282eeae830ad71b1, type: 2}
+  - {fileID: 2100000, guid: 6a137a711dab1dd4c9609c5b44c38f5a, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &3343586
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152798}
+  m_Mesh: {fileID: 4300000, guid: d288bf0128d22884fa199ceebc97ff47, type: 2}
+--- !u!114 &11414568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153f28ebef7ee024d94614d7ff3d7de9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closed: 0
+  pathVerts:
+  - {x: -6.93457794, y: 2.30241895}
+  - {x: -.78140831, y: 2.32489991}
+  - {x: 5.62079525, y: 1.50778413}
+--- !u!114 &11419150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae7b1569fbd8b74e9d1f386902732b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerAround: {fileID: 0}
+  vertCount: 10
+  vertSpacing: 10
+  minHeight: 0
+  maxHeight: 8
+  heightVariance: 4
+  cliffChance: .200000003
+--- !u!114 &11449068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f66502d17e51d4aae0b1e16d1903a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fill: 1
+  fillY: -10
+  fillZ: .100000001
+  splitCorners: 1
+  smoothPath: 1
+  splitCount: 4
+  splitDist: 1
+  splitMiddle: 1
+  pixelsPerUnit: 48
+  vertexColor: {r: .784313738, g: .647096276, b: .43983084, a: 1}
+  stretchThreshold: .5
+  createTangents: 0
+  randomByWorldCoordinates: 1
+  uvOffset: {x: 0, y: 0}
+  slantAmount: 0
+  createCollider: 1
+  create3DCollider: 0
+  isTrigger: 0
+  depth: 4
+  smoothSphereCollisions: 0
+  sharpCorners: 0
+  sharpCornerDistance: 2
+  surfaceOffset:
+  - .400000006
+  - 0
+  - 0
+  - 0
+  physicsMaterial: {fileID: 0}
+  physicsMaterial2D: {fileID: 0}
+  collidersLeft: 1
+  collidersRight: 1
+  collidersTop: 1
+  collidersBottom: 1
+  colliderThickness: .100000001
+  directionOverrides: 640000006400000064000000
+  vertScales:
+  - 1
+  - 1
+  - 1
+  terrainMaterial: {fileID: 11400000, guid: 853592345bf59ca41926f39b4a27da2d, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 152798}
+  m_IsPrefabParent: 1

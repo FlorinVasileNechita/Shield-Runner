@@ -18,7 +18,7 @@ public class EnemyAIManager : MonoBehaviour {
 		int spawnDistance = 16;
 		int additionDistance = 3;
 		if (isBuzzsaw) centerPoint.x  += additionDistance;
-		for (int k = -3; k <= 10; k++) {
+		for (int k = -6; k <= 10; k++) {
 			Vector2 basicPointA = new Vector2(centerPoint.x + spawnDistance, centerPoint.y + k);
 			
 			if (!Physics2D.OverlapCircle(basicPointA, radio, ConstantVariable.platformLayer)) {

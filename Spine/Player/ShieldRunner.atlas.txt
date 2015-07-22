@@ -1,0 +1,83 @@
+
+ShieldRunner.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: true
+  xy: 687, 138
+  size: 131, 236
+  orig: 133, 238
+  offset: 1, 1
+  index: -1
+Foot
+  rotate: false
+  xy: 614, 24
+  size: 63, 102
+  orig: 65, 104
+  offset: 1, 1
+  index: -1
+Head
+  rotate: false
+  xy: 353, 128
+  size: 332, 361
+  orig: 334, 363
+  offset: 1, 1
+  index: -1
+Helmet
+  rotate: false
+  xy: 2, 84
+  size: 349, 405
+  orig: 351, 407
+  offset: 1, 1
+  index: -1
+HelmetCover
+  rotate: false
+  xy: 687, 271
+  size: 325, 218
+  orig: 327, 220
+  offset: 1, 1
+  index: -1
+LBackArm
+  rotate: true
+  xy: 238, 2
+  size: 80, 115
+  orig: 82, 117
+  offset: 1, 1
+  index: -1
+RBackArm
+  rotate: true
+  xy: 238, 2
+  size: 80, 115
+  orig: 82, 117
+  offset: 1, 1
+  index: -1
+LForeArm
+  rotate: false
+  xy: 485, 44
+  size: 127, 82
+  orig: 129, 84
+  offset: 1, 1
+  index: -1
+Leg
+  rotate: true
+  xy: 355, 19
+  size: 107, 128
+  orig: 109, 130
+  offset: 1, 1
+  index: -1
+RForeArm
+  rotate: true
+  xy: 925, 126
+  size: 143, 85
+  orig: 145, 87
+  offset: 1, 1
+  index: -1
+Shield
+  rotate: true
+  xy: 2, 25
+  size: 57, 234
+  orig: 59, 236
+  offset: 1, 1
+  index: -1

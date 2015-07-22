@@ -15,7 +15,7 @@ public class EnemyAIManager : MonoBehaviour {
 
 
 	private void spawn(Vector2 centerPoint, bool isBuzzsaw, GameObject prefab, float radio) {
-		int spawnDistance = 16;
+		int spawnDistance = 20;
 		int additionDistance = 3;
 		if (isBuzzsaw) centerPoint.x  += additionDistance;
 		for (int k = -6; k <= 10; k++) {

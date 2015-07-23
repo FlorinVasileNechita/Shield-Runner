@@ -13,17 +13,18 @@ namespace Game {
 		public int speed = 5;
 		private int maxJumpNum = 2;
 		private float stunTime = 1f;
-		
+
 		//1 = walk, 2 = jump, 3 = land
 		public Animator mAnim;
 		public Rigidbody2D mRigidBody;
 		public BoxCollider2D mBoxCollider;
+		private SkeletonRenderer skeletonRender;
 		public GameObject landParticle;
 		public GameObject jumpParticle;
 		public GameObject shieldParticle;
 
 		private float shieldChangePoint = -0.6f;
-
+		private Sprite[] shieldSprites;
 		delegate void ShieldMethod();
 		ShieldMethod shieldHandler;
 
@@ -32,7 +33,9 @@ namespace Game {
 			mRigidBody = GetComponent<Rigidbody2D>();
 			mBoxCollider = GetComponent<BoxCollider2D>();
 			mAnim = GetComponent<Animator>();
+			skeletonRender = GetComponent<SkeletonRenderer>();
 			shieldDeviceDetector();
+			shieldSprites = Resources.LoadAll<Sprite>("Game/shields");
 		}
 
 		void Update() {
@@ -66,8 +69,13 @@ namespace Game {
 			transform.Translate(transform.right * speed *  Time.deltaTime);
 		}
 
+		public void damage() {
+			//currentStatus = Status.BeHit;
+			mAnim.SetTrigger("BeHit");
+		}
 
 		//=============================================== Practical Function ==============================
+		
 		
 		public void particleSwitcher(GameObject particleObject, bool play) {
 			particleObject.SetActive(play);
@@ -101,6 +109,11 @@ namespace Game {
 			currentShieldStatus = color;
 			particleSwitcher(shieldParticle, true);
 			shieldParticle.GetComponent<ParticleSystem>().startColor = (color == "red") ? Color.red : Color.green;
+			
+			foreach (Sprite sprite in shieldSprites) {
+				if (sprite.name == color+"_shield") skeletonRender.skeleton.AttachUnitySprite("Shield", sprite);
+			}
 		}
+		
 	}
 }

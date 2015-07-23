@@ -20,20 +20,25 @@ namespace Game {
 		public BoxCollider2D mBoxCollider;
 		public GameObject landParticle;
 		public GameObject jumpParticle;
+		public GameObject shieldParticle;
+
+		private float shieldChangePoint = -0.6f;
+
+		delegate void ShieldMethod();
+		ShieldMethod shieldHandler;
+
 		// Use this for initialization
 		void Start () {
 			mRigidBody = GetComponent<Rigidbody2D>();
 			mBoxCollider = GetComponent<BoxCollider2D>();
 			mAnim = GetComponent<Animator>();
-			
+			shieldDeviceDetector();
 		}
 
 		void Update() {
-			
+			shieldHandler();	
 			if (Input.GetMouseButtonDown(0)) Jump();
-			if (Input.GetKeyDown(KeyCode.Z)) shieldHandler("red");
-			if (Input.GetKeyDown(KeyCode.X)) shieldHandler("green");
-					
+
 		}
 
 		// Update is called once per frame
@@ -42,9 +47,11 @@ namespace Game {
 		}
 
 		void Jump() {
+			float floorHeight = Screen.height - (Screen.height * 0.14f);
+			float inputHeight = Input.mousePosition.y;
 			int jumpPower = 10;
 			float actualPower = (jumpNum == 0) ? jumpPower : jumpPower * 0.7f;
-			if (jumpNum < maxJumpNum) {
+			if (jumpNum < maxJumpNum && inputHeight < floorHeight) {
 				if (jumpNum == 0) {
 					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, actualPower);					
 				} else {
@@ -58,16 +65,42 @@ namespace Game {
 		void Move() {
 			transform.Translate(transform.right * speed *  Time.deltaTime);
 		}
-		
-		
-		
-		void shieldHandler(string color) {
-			
-			
-		}
+
+
+		//=============================================== Practical Function ==============================
 		
 		public void particleSwitcher(GameObject particleObject, bool play) {
 			particleObject.SetActive(play);
+			ParticleSystem pObject = particleObject.GetComponent<ParticleSystem>();
+			pObject.time = 0;
+			pObject.Play();
+		}
+
+		void mobileShieldHandler() {
+			if (Input.acceleration.y > shieldChangePoint) {
+				chanageShieldStatus("green");
+			} else {
+				chanageShieldStatus("red");
+			}
+		}
+		
+		void desktopShieldHandler() {
+			if (Input.GetKeyDown(KeyCode.Z)) chanageShieldStatus("red");
+			if (Input.GetKeyDown(KeyCode.X)) chanageShieldStatus("green");
+		}
+		
+		void shieldDeviceDetector() {
+			if (SystemInfo.deviceType == DeviceType.Handheld) {
+				shieldHandler = mobileShieldHandler;
+			} else {
+				shieldHandler = desktopShieldHandler;
+			}
+		}
+		
+		void chanageShieldStatus(string color) {
+			currentShieldStatus = color;
+			particleSwitcher(shieldParticle, true);
+			shieldParticle.GetComponent<ParticleSystem>().startColor = (color == "red") ? Color.red : Color.green;
 		}
 	}
 }

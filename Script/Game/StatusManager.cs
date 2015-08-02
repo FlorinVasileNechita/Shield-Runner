@@ -16,7 +16,7 @@ namespace Game {
 
 		void checkIsLand() {
 			if (raycastDetector.bottomHits.Count > 0) {
-				playerManager.currentStatus = PlayerManager.Status.Run;
+				playerManager.currentStatus = (playerManager.currentStatus == PlayerManager.Status.BeHit) ? PlayerManager.Status.BeHit : PlayerManager.Status.Run;
 				if (playerManager.mRigidBody.velocity.y <= 0) {
 					playerManager.jumpNum = 0;
 					playerManager.isLand = true;
@@ -29,7 +29,7 @@ namespace Game {
 				}
 			} else {
 				playerManager.isLand = false;
-				playerManager.currentStatus = PlayerManager.Status.Jump;
+				playerManager.currentStatus = (playerManager.currentStatus == PlayerManager.Status.BeHit) ? PlayerManager.Status.BeHit : PlayerManager.Status.Jump;
 				if (playerManager.mRigidBody.velocity.y <= 0) {
 					playerManager.mAnim.SetInteger("Status", 3);
 				} else {
@@ -37,9 +37,21 @@ namespace Game {
 				}
 			}
 		}
+		
+		void checkJumpOnEnemyHead() {
+			if (raycastDetector.bottomHits.Count > 1) {
+				foreach (RaycastHit2D cast in raycastDetector.bottomHits) {
+					if (cast.collider.tag == "Enemy") {
+						playerManager.mRigidBody.velocity = new Vector2(playerManager.mRigidBody.velocity.x, 7);
+						return;
+					}
+				}	
+			}
+		}
 
 		void Update() {
 			checkIsLand();
+			checkJumpOnEnemyHead();
 		}
 
 	}

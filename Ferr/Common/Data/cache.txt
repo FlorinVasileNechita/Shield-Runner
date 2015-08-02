@@ -416,6 +416,8 @@ Assets/JMO Assets/Cartoon FX/CFX4 Prefabs (Mobile)/Water/CFXM4 Rain Storm (COLLI
 Assets/JMO Assets/Cartoon FX/CFX4 Prefabs (Mobile)/Misc/Variants/CFXM4 Hit Flower (Red).prefab
 Assets/Resources/Game/Player.prefab
 Assets/Scene/Back Terrain.prefab
+Assets/Resources/Game/Test/Enemy.prefab
+Assets/Resources/Game/Test/Bullet.prefab
 
 [Ferr2DT_PathTerrain]
 Assets/Ferr/2DTerrain/TerrainMaterials/ForestTerrainMaterial.prefab
@@ -834,3 +836,5 @@ Assets/JMO Assets/Cartoon FX/CFX4 Prefabs (Mobile)/Water/CFXM4 Rain Storm (COLLI
 Assets/JMO Assets/Cartoon FX/CFX4 Prefabs (Mobile)/Misc/Variants/CFXM4 Hit Flower (Red).prefab
 Assets/Resources/Game/Player.prefab
 Assets/Scene/Back Terrain.prefab
+Assets/Resources/Game/Test/Enemy.prefab
+Assets/Resources/Game/Test/Bullet.prefab

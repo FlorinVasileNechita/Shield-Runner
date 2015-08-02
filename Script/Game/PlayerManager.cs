@@ -12,18 +12,18 @@ namespace Game {
 		public int jumpNum = 0;
 		public int speed = 5;
 		private int maxJumpNum = 2;
-		private float stunTime = 1f;
+		private float stunTime = 0.8f;
 
 		//1 = walk, 2 = jump, 3 = land
 		public Animator mAnim;
 		public Rigidbody2D mRigidBody;
 		public BoxCollider2D mBoxCollider;
-		private SkeletonRenderer skeletonRender;
+		public GameObject greenShield;
 		public GameObject landParticle;
 		public GameObject jumpParticle;
 		public GameObject shieldParticle;
 
-		private float shieldChangePoint = -0.6f;
+		private float shieldChangePoint = -0.5f;
 		private Sprite[] shieldSprites;
 		delegate void ShieldMethod();
 		ShieldMethod shieldHandler;
@@ -33,15 +33,14 @@ namespace Game {
 			mRigidBody = GetComponent<Rigidbody2D>();
 			mBoxCollider = GetComponent<BoxCollider2D>();
 			mAnim = GetComponent<Animator>();
-			skeletonRender = GetComponent<SkeletonRenderer>();
 			shieldDeviceDetector();
 			shieldSprites = Resources.LoadAll<Sprite>("Game/shields");
 		}
 
 		void Update() {
-			shieldHandler();	
+			shieldHandler();
 			if (Input.GetMouseButtonDown(0)) Jump();
-
+			
 		}
 
 		// Update is called once per frame
@@ -70,10 +69,18 @@ namespace Game {
 		}
 
 		public void damage() {
-			//currentStatus = Status.BeHit;
+			currentStatus = Status.BeHit;
 			mAnim.SetTrigger("BeHit");
+			StartCoroutine(ResumeRunStatus(stunTime));
+			mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 0);
 		}
-
+		
+		IEnumerator ResumeRunStatus(float waitTime) {
+			yield return new WaitForSeconds(waitTime);
+			currentStatus = Status.Run;
+		}
+		
+		
 		//=============================================== Practical Function ==============================
 		
 		
@@ -106,12 +113,11 @@ namespace Game {
 		}
 		
 		void chanageShieldStatus(string color) {
-			currentShieldStatus = color;
-			particleSwitcher(shieldParticle, true);
-			shieldParticle.GetComponent<ParticleSystem>().startColor = (color == "red") ? Color.red : Color.green;
-			
-			foreach (Sprite sprite in shieldSprites) {
-				if (sprite.name == color+"_shield") skeletonRender.skeleton.AttachUnitySprite("Shield", sprite);
+			if (currentShieldStatus != color) {
+				currentShieldStatus = color;
+				particleSwitcher(shieldParticle, true);
+				shieldParticle.GetComponent<ParticleSystem>().startColor = (color == "red") ? Color.red : Color.green;
+				greenShield.GetComponent<SpriteRenderer>().enabled = (color == "green") ? true : false;
 			}
 		}
 		

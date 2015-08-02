@@ -13,7 +13,7 @@ public class BottomManager : MonoBehaviour {
 	public float        cliffChance = 0.1f;
 
 	private EnemyAIManager aiManager;
-
+	private bool firstBuild = true;
 	Ferr2DT_PathTerrain terrain;
 	List<float>         terrainHeights;
 	List<float>         terrainSecondaryHeights;
@@ -28,7 +28,15 @@ public class BottomManager : MonoBehaviour {
 			NewRight();
 		}
 		RebuildTerrain();
+		StartCoroutine(ResumeBuild());
 	}
+	
+	IEnumerator ResumeBuild() {
+		yield return new WaitForSeconds(1);
+		firstBuild = false;
+	}
+	
+	
 	void Update () {
 		UpdateTerrain();
 	}
@@ -80,8 +88,10 @@ public class BottomManager : MonoBehaviour {
 		if (Mathf.Abs(right - right2) < 3) {
 			right = right2;
 		}
-
-		if (Time.time > 1) aiManager.refresh(centerAround.transform.position);
+		
+		if (!firstBuild) {
+			aiManager.refresh(centerAround.transform.position);
+		}
 
 		terrainHeights         .Add(right );
 		terrainSecondaryHeights.Add(right2);

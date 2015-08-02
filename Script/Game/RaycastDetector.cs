@@ -10,6 +10,7 @@ namespace Game {
 		private float horizontalGap;
 		private float verticalGap;
 		private int raycastLine = 4;
+		private int raycastLayer = ConstantVariable.platformLayer | ConstantVariable.enemyLayer;
 		public List<RaycastHit2D> sideHits = new List<RaycastHit2D>();
 		public List<RaycastHit2D> topHits = new List<RaycastHit2D>();
 		public List<RaycastHit2D> bottomHits = new List<RaycastHit2D>();

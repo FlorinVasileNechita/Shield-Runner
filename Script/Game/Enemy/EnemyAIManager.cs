@@ -4,21 +4,24 @@ using System.Collections;
 public class EnemyAIManager : MonoBehaviour {
 	private int spawnRatio = 6;
 	private GameObject buzzsawPrefab;
-
+	private GameObject monsterPrefab;
+	
 	private GameObject barrierParent;
 
 	// Use this for initialization
 	void Start () {
 		buzzsawPrefab = Resources.Load<GameObject>("Game/buzzsaw");
+		monsterPrefab = Resources.Load<GameObject>("Game/Test/Enemy");
+		
 		barrierParent = GameObject.Find("Barriers");
 	}
 
 
 	private void spawn(Vector2 centerPoint, bool isBuzzsaw, GameObject prefab, float radio) {
-		int spawnDistance = 20;
+		int spawnDistance = 23;
 		int additionDistance = 3;
 		if (isBuzzsaw) centerPoint.x  += additionDistance;
-		for (int k = -6; k <= 10; k++) {
+		for (int k = -9; k <= 10; k++) {
 			Vector2 basicPointA = new Vector2(centerPoint.x + spawnDistance, centerPoint.y + k);
 			
 			if (!Physics2D.OverlapCircle(basicPointA, radio, ConstantVariable.platformLayer)) {
@@ -31,7 +34,7 @@ public class EnemyAIManager : MonoBehaviour {
 
 	private void generate(Vector2 centerPoint) {
 		float spawnSawRatio = Random.Range(0 , 20);
-		float spawnEnemyRatio = Random.Range(0 , 10);
+		float spawnEnemyRatio = Random.Range(0 , 30);
 
 		//SpawnSaw
 		if (spawnSawRatio < 6) {
@@ -40,7 +43,7 @@ public class EnemyAIManager : MonoBehaviour {
 
 		//SpawnEnemy
 		if (spawnEnemyRatio < 6) {
-			//spawn(centerPoint, false, buzzsaw);
+			spawn(centerPoint, false, monsterPrefab, 1.5f);
 		}
 
 

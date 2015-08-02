@@ -16,9 +16,10 @@ namespace Game {
 		void FixedUpdate () {
 			if (followObject.transform.position.x < camX - screenWidth / 2) {
 				//Restart
-				followObject.transform.position = new Vector3(0, 9, 0);
-				transform.position = new Vector3(0, 9, transform.position.z);
-				camX = 0;
+//				followObject.transform.position = new Vector3(0, 9, 0);
+//				transform.position = new Vector3(0, 9, transform.position.z);
+//				camX = 0;
+				Application.LoadLevel(Application.loadedLevel);
 			}
 			
 			camX += GetSpeed() * Time.deltaTime;

@@ -12,7 +12,6 @@ public class EnemyAIManager : MonoBehaviour {
 	void Start () {
 		buzzsawPrefab = Resources.Load<GameObject>("Game/buzzsaw");
 		monsterPrefab = Resources.Load<GameObject>("Game/Test/Enemy");
-		
 		barrierParent = GameObject.Find("Barriers");
 	}
 

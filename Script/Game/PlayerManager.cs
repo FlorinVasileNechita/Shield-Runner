@@ -105,7 +105,6 @@ namespace Game {
 					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 10);
 					boostSpeed();
 				}
-				Debugger.Log(coll.gameObject.tag);
 			}
 		}
 		

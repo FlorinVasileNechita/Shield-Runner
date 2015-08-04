@@ -12,8 +12,8 @@ namespace Game {
 		public int jumpNum = 0;
 		public int speed = 5;
 		private int maxJumpNum = 2;
-		private float stunTime = 0.8f;
-
+		private float stunTime = 0.9f;
+		private int boosttime = 5;
 		//1 = walk, 2 = jump, 3 = land
 		public Animator mAnim;
 		public Rigidbody2D mRigidBody;
@@ -22,7 +22,8 @@ namespace Game {
 		public GameObject landParticle;
 		public GameObject jumpParticle;
 		public GameObject shieldParticle;
-
+		public GameObject boostdParticle;
+		private TrailRenderer mTrailRenderer;
 		private float shieldChangePoint = -0.5f;
 		private Sprite[] shieldSprites;
 		delegate void ShieldMethod();
@@ -31,6 +32,8 @@ namespace Game {
 		// Use this for initialization
 		void Start () {
 			mRigidBody = GetComponent<Rigidbody2D>();
+			mTrailRenderer = GetComponent<TrailRenderer>();
+
 			mBoxCollider = GetComponent<BoxCollider2D>();
 			mAnim = GetComponent<Animator>();
 			shieldDeviceDetector();
@@ -74,12 +77,36 @@ namespace Game {
 			StartCoroutine(ResumeRunStatus(stunTime));
 			mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 0);
 		}
-		
+
+		public void boostSpeed() {
+			mTrailRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+			particleSwitcher(boostdParticle, true);
+			speed = 8;
+			StartCoroutine(resumeNormalSpeed());
+		}
+
+		IEnumerator resumeNormalSpeed() {
+			yield return new WaitForSeconds(boosttime);
+			speed = 5;
+			mTrailRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+			particleSwitcher(boostdParticle, false);
+		}
+
 		IEnumerator ResumeRunStatus(float waitTime) {
 			yield return new WaitForSeconds(waitTime);
 			currentStatus = Status.Run;
 		}
-		
+
+
+		void OnCollisionEnter2D(Collision2D coll) {
+			if (coll.gameObject.tag == "Enemy") {
+				if (currentStatus == Status.Jump) {
+					jumpNum = 0;
+					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 10);
+					boostSpeed();
+				}
+			}
+		}
 		
 		//=============================================== Practical Function ==============================
 		

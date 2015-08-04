@@ -37,21 +37,9 @@ namespace Game {
 				}
 			}
 		}
-		
-		void checkJumpOnEnemyHead() {
-			if (raycastDetector.bottomHits.Count > 1) {
-				foreach (RaycastHit2D cast in raycastDetector.bottomHits) {
-					if (cast.collider.tag == "Enemy") {
-						playerManager.mRigidBody.velocity = new Vector2(playerManager.mRigidBody.velocity.x, 7);
-						return;
-					}
-				}	
-			}
-		}
 
 		void Update() {
 			checkIsLand();
-			checkJumpOnEnemyHead();
 		}
 
 	}

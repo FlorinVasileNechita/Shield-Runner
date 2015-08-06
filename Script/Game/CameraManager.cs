@@ -6,9 +6,9 @@ namespace Game {
 	public class CameraManager : MonoBehaviour {
 		public GameObject followObject;
 		public float maxXOffset = -5;
-
+		public int cameraSpeed = 0;
 		float screenWidth;
-		float camX;
+		float camX = 0;
 		
 		void Start      () {
 			screenWidth = GetViewSizeAtDistance(Mathf.Abs(followObject.transform.position.z - transform.position.z)).x;
@@ -22,7 +22,7 @@ namespace Game {
 				Application.LoadLevel(Application.loadedLevel);
 			}
 			
-			camX += GetSpeed() * Time.deltaTime;
+			//camX += GetSpeed() * Time.deltaTime;
 			if (followObject.transform.position.x > camX + maxXOffset) {
 				camX = followObject.transform.position.x - maxXOffset;
 			}
@@ -30,7 +30,7 @@ namespace Game {
 		}
 		
 		float GetSpeed() {
-			return 4;
+			return cameraSpeed;
 		}
 		
 		public static Vector2 GetViewSizeAtDistance(float aDist) {

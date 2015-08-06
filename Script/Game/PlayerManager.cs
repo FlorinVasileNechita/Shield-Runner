@@ -4,8 +4,8 @@ using System.Collections;
 
 namespace Game {
 	public class PlayerManager : MonoBehaviour {
-		public enum Status {Run, Jump, BeHit};
-		public Status currentStatus = Status.Run;
+		public enum Status {Run, Jump, BeHit, Idle};
+		public Status currentStatus = Status.Idle;
 		public string currentShieldStatus = "red";
 	
 		public bool isLand;
@@ -18,6 +18,7 @@ namespace Game {
 		public Animator mAnim;
 		public Rigidbody2D mRigidBody;
 		public BoxCollider2D mBoxCollider;
+		public GameManager gameManager;
 		public GameObject greenShield;
 		public GameObject landParticle;
 		public GameObject jumpParticle;
@@ -33,7 +34,7 @@ namespace Game {
 		void Start () {
 			mRigidBody = GetComponent<Rigidbody2D>();
 			mTrailRenderer = GetComponent<TrailRenderer>();
-
+			gameManager = Camera.main.gameObject.GetComponent<GameManager>();
 			mBoxCollider = GetComponent<BoxCollider2D>();
 			mAnim = GetComponent<Animator>();
 			shieldDeviceDetector();
@@ -41,14 +42,15 @@ namespace Game {
 		}
 
 		void Update() {
-			shieldHandler();
-			if (Input.GetMouseButtonDown(0)) Jump();
-			
+			if (currentStatus != Status.Idle) {
+				shieldHandler();
+				if (Input.GetMouseButtonDown(0)) Jump();
+			}
 		}
 
 		// Update is called once per frame
 		void FixedUpdate () {
-			if (currentStatus != Status.BeHit) Move ();
+			if (currentStatus != Status.BeHit && currentStatus != Status.Idle) Move ();
 		}
 
 		void Jump() {
@@ -107,7 +109,10 @@ namespace Game {
 				}
 			}
 		}
-		
+
+
+
+
 		//=============================================== Practical Function ==============================
 		
 		

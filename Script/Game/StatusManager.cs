@@ -39,7 +39,7 @@ namespace Game {
 		}
 
 		void Update() {
-			checkIsLand();
+			if (playerManager.currentStatus != PlayerManager.Status.Idle) checkIsLand();
 		}
 
 	}

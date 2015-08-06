@@ -2,13 +2,13 @@
 using System.Collections;
 
 public class BulletEffect : MonoBehaviour {
-	int bulletSpeed = 8;
+	int bulletSpeed = 7;
 	bool on = false;
 	string bulletColor;
 	
 	public void bulletStart(float waitS, Color color) {
 		gameObject.SetActive(true);
-		Destroy(gameObject, 6);
+		Destroy(gameObject, 7);
 		gameObject.GetComponent<MeshRenderer>().material.color = color;
 		bulletColor = (color == Color.red) ? "red" : "green";
 		StartCoroutine(bulletIsOn(waitS));
@@ -32,8 +32,6 @@ public class BulletEffect : MonoBehaviour {
 			if (player.currentShieldStatus != bulletColor) {
 				other.GetComponent<Game.PlayerManager>().damage();
 			}
-			Destroy(gameObject);
-		} else if (other.tag == "Terrain") {
 			Destroy(gameObject);
 		}
 	}

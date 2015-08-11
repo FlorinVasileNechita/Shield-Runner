@@ -8,7 +8,7 @@ public class BulletEffect : MonoBehaviour {
 	
 	public void bulletStart(float waitS, Color color) {
 		gameObject.SetActive(true);
-		Destroy(gameObject, 7);
+		Destroy(gameObject, 8);
 		gameObject.GetComponent<MeshRenderer>().material.color = color;
 		bulletColor = (color == Color.red) ? "red" : "green";
 		StartCoroutine(bulletIsOn(waitS));

@@ -5,14 +5,17 @@ public class EnemyAIManager : MonoBehaviour {
 	private int spawnRatio = 6;
 	private GameObject buzzsawPrefab;
 	private GameObject monsterPrefab;
-	
+	private GameObject player;
 	private GameObject barrierParent;
+	private AttackMethod attackMethod;
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player");
 		buzzsawPrefab = Resources.Load<GameObject>("Game/buzzsaw");
 		monsterPrefab = Resources.Load<GameObject>("Game/Test/Enemy");
 		barrierParent = GameObject.Find("Barriers");
+		attackMethod = gameObject.AddComponent<AttackMethod>();
 	}
 
 	private void spawn(Vector2 centerPoint, bool isBuzzsaw, GameObject prefab, float radio) {
@@ -31,9 +34,19 @@ public class EnemyAIManager : MonoBehaviour {
 		}
 	}
 
+	private void remoteAttacker() {
+		EnemyHandler[] enemys = barrierParent.GetComponentsInChildren<EnemyHandler>();	
+		foreach (EnemyHandler enemy in enemys) {
+			if (enemy.gameObject.transform.position.x > player.transform.position.x ) return;			
+		}
+		int attackPattern = Random.Range(2, 4);
+		attackMethod.shootBullet(new Vector2(player.transform.position.x +45, player.transform.position.y+1 ), attackPattern);
+	}
+	
+
 	private void generate(Vector2 centerPoint) {
-		float spawnSawRatio = Random.Range(0 , 20);
-		float spawnEnemyRatio = Random.Range(0 , 15);
+		float spawnSawRatio = Random.Range(0 , 15);
+		float spawnEnemyRatio = Random.Range(0 , 10);
 
 		//SpawnSaw
 		if (spawnSawRatio < 6) {
@@ -59,5 +72,8 @@ public class EnemyAIManager : MonoBehaviour {
 	public void refresh(Vector2 centerPoint) {
 		generate(centerPoint);
 		delete(centerPoint);
+		remoteAttacker();
 	}
+	
+	
 }

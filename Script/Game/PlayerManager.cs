@@ -14,6 +14,10 @@ namespace Game {
 		private int maxJumpNum = 2;
 		private float stunTime = 0.9f;
 		private int boosttime = 5;
+		private int boostStack;
+		
+		private int bulletCatch;
+		private float bulletTime;
 		//1 = walk, 2 = jump, 3 = land
 		public Animator mAnim;
 		public Rigidbody2D mRigidBody;
@@ -24,6 +28,7 @@ namespace Game {
 		public GameObject jumpParticle;
 		public GameObject shieldParticle;
 		public GameObject boostdParticle;
+		private int jumpPower = 15;
 		private TrailRenderer mTrailRenderer;
 		private float shieldChangePoint = -0.5f;
 		private Sprite[] shieldSprites;
@@ -56,9 +61,8 @@ namespace Game {
 		void Jump() {
 			float floorHeight = Screen.height - (Screen.height * 0.14f);
 			float inputHeight = Input.mousePosition.y;
-			int jumpPower = 10;
 			float actualPower = (jumpNum == 0) ? jumpPower : jumpPower * 0.7f;
-			if (jumpNum < maxJumpNum && inputHeight < floorHeight) {
+			if (jumpNum < maxJumpNum && inputHeight < floorHeight && currentStatus != Status.BeHit) {
 				if (jumpNum == 0) {
 					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, actualPower);					
 				} else {
@@ -75,28 +79,44 @@ namespace Game {
 
 		public void damage() {
 			currentStatus = Status.BeHit;
-			mAnim.SetTrigger("BeHit");
+			mAnim.SetBool("BeHit", true);
 			StartCoroutine(ResumeRunStatus(stunTime));
 			mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 0);
+		}
+
+		public void bulletBlock() {
+			int boostBulletSecond = 3;
+			int maxBulletNum = 4;
+			bulletCatch++;
+			if (bulletTime > Time.time && bulletCatch >= maxBulletNum) {
+				bulletCatch = 0;
+			}
+			bulletTime = Time.time + 3;
 		}
 
 		public void boostSpeed() {
 			mTrailRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 			particleSwitcher(boostdParticle, true);
 			speed = 8;
-			StartCoroutine(resumeNormalSpeed());
+			boostStack++;
+			StartCoroutine(resumeNormalSpeed(boosttime));
 		}
 
-		IEnumerator resumeNormalSpeed() {
+		IEnumerator resumeNormalSpeed(float boosttime) {
 			yield return new WaitForSeconds(boosttime);
-			speed = 5;
-			mTrailRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-			particleSwitcher(boostdParticle, false);
+			boostStack--;
+			if (boostStack <= 0) {
+				speed = 5;
+				mTrailRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+				particleSwitcher(boostdParticle, false);
+				boostStack = 0;
+			}
 		}
 
 		IEnumerator ResumeRunStatus(float waitTime) {
 			yield return new WaitForSeconds(waitTime);
 			currentStatus = Status.Run;
+			mAnim.SetBool("BeHit", false);
 		}
 
 
@@ -104,14 +124,11 @@ namespace Game {
 			if (coll.gameObject.tag == "Enemy") {
 				if (currentStatus == Status.Jump) {
 					jumpNum = 0;
-					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 10);
+					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, jumpPower);
 					boostSpeed();
 				}
 			}
 		}
-
-
-
 
 		//=============================================== Practical Function ==============================
 		

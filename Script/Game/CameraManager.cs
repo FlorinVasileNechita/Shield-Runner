@@ -22,7 +22,7 @@ namespace Game {
 				Application.LoadLevel(Application.loadedLevel);
 			}
 			
-			//camX += GetSpeed() * Time.deltaTime;
+			camX += GetSpeed() * Time.deltaTime;
 			if (followObject.transform.position.x > camX + maxXOffset) {
 				camX = followObject.transform.position.x - maxXOffset;
 			}

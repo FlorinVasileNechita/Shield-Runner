@@ -9,6 +9,7 @@ namespace Game {
 		public bool gameOn  = false;
 
 
+
 		// Use this for initialization
 		void Start () {
 			Bottom = GameObject.Find("Bottom");

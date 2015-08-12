@@ -5,7 +5,7 @@ public class EnemyHandler : MonoBehaviour {
 	int speed;	
 	BoxCollider2D mBoxCollider;
 	int attackPerPeriod = 3;
-	int attackPattern = 6;
+	int attackPattern = 8;
 	AttackMethod attackMethod;
 	// Use this for initialization
 	void Start () {

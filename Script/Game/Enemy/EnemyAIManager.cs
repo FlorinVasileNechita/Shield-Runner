@@ -39,14 +39,14 @@ public class EnemyAIManager : MonoBehaviour {
 		foreach (EnemyHandler enemy in enemys) {
 			if (enemy.gameObject.transform.position.x > player.transform.position.x ) return;			
 		}
-		int attackPattern = Random.Range(2, 4);
-		attackMethod.shootBullet(new Vector2(player.transform.position.x +45, player.transform.position.y+1 ), attackPattern);
+		int attackPattern = Random.Range(2, 8);
+		attackMethod.shootBullet(new Vector2(player.transform.position.x +45, player.transform.position.y+1.2f ), attackPattern);
 	}
 	
 
 	private void generate(Vector2 centerPoint) {
 		float spawnSawRatio = Random.Range(0 , 15);
-		float spawnEnemyRatio = Random.Range(0 , 10);
+		float spawnEnemyRatio = Random.Range(0 , 9);
 
 		//SpawnSaw
 		if (spawnSawRatio < 6) {

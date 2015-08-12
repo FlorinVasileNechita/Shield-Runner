@@ -29,6 +29,9 @@ namespace Game {
 		public GameObject shieldParticle;
 		public GameObject boostdParticle;
 		private int jumpPower = 15;
+		public MusicHandler mMusicHanlder;
+		public MusicModel mMusicModel;
+
 		private TrailRenderer mTrailRenderer;
 		private float shieldChangePoint = -0.5f;
 		private Sprite[] shieldSprites;
@@ -39,6 +42,8 @@ namespace Game {
 		void Start () {
 			mRigidBody = GetComponent<Rigidbody2D>();
 			mTrailRenderer = GetComponent<TrailRenderer>();
+			mMusicModel = Camera.main.gameObject.GetComponent<MusicModel>();
+			mMusicHanlder = gameObject.AddComponent<MusicHandler>();
 			gameManager = Camera.main.gameObject.GetComponent<GameManager>();
 			mBoxCollider = GetComponent<BoxCollider2D>();
 			mAnim = GetComponent<Animator>();
@@ -68,6 +73,7 @@ namespace Game {
 				} else {
 					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, actualPower);
 				}
+				mMusicHanlder.playSound(mMusicModel.jump);
 				particleSwitcher(jumpParticle, true);
 				jumpNum++;		
 			}
@@ -99,6 +105,7 @@ namespace Game {
 			particleSwitcher(boostdParticle, true);
 			speed = 8;
 			boostStack++;
+			GameObject.Find("Barriers").GetComponent<MusicHandler>().playSound(mMusicModel.powerUp);
 			StartCoroutine(resumeNormalSpeed(boosttime));
 		}
 
@@ -167,6 +174,7 @@ namespace Game {
 				particleSwitcher(shieldParticle, true);
 				shieldParticle.GetComponent<ParticleSystem>().startColor = (color == "red") ? Color.red : Color.green;
 				greenShield.GetComponent<SpriteRenderer>().enabled = (color == "green") ? true : false;
+				mMusicHanlder.playSound(mMusicModel.changeShield);
 			}
 		}
 		

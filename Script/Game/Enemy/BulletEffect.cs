@@ -4,13 +4,17 @@ using System.Collections;
 public class BulletEffect : MonoBehaviour {
 	int bulletSpeed = 7;
 	bool on = false;
+	AudioClip catchAudio;
 	string bulletColor;
-	
+	MusicHandler musicHandler;
+
 	public void bulletStart(float waitS, Color color) {
 		gameObject.SetActive(true);
 		Destroy(gameObject, 8);
 		gameObject.GetComponent<MeshRenderer>().material.color = color;
 		bulletColor = (color == Color.red) ? "red" : "green";
+		catchAudio = Resources.Load<AudioClip>("Music/Game/catch_" + bulletColor);
+		musicHandler = GameObject.Find("Barriers").GetComponent<MusicHandler>();
 		StartCoroutine(bulletIsOn(waitS));
 	}
 	
@@ -30,7 +34,10 @@ public class BulletEffect : MonoBehaviour {
 		if (other.tag == "Player") {
 			Game.PlayerManager player = other.GetComponent<Game.PlayerManager>();
 			if (player.currentShieldStatus != bulletColor) {
-				other.GetComponent<Game.PlayerManager>().damage();
+				player.damage();
+				musicHandler.playSound(player.mMusicModel.hitBall);
+			} else {
+				musicHandler.playSound(catchAudio);
 			}
 			Destroy(gameObject);
 		}

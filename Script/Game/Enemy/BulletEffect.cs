@@ -7,6 +7,7 @@ public class BulletEffect : MonoBehaviour {
 	AudioClip catchAudio;
 	string bulletColor;
 	MusicHandler musicHandler;
+	GUI_MainManager guiManager;
 
 	public void bulletStart(float waitS, Color color) {
 		gameObject.SetActive(true);
@@ -15,6 +16,7 @@ public class BulletEffect : MonoBehaviour {
 		bulletColor = (color == Color.red) ? "red" : "green";
 		catchAudio = Resources.Load<AudioClip>("Music/Game/catch_" + bulletColor);
 		musicHandler = GameObject.Find("Barriers").GetComponent<MusicHandler>();
+		guiManager = GameObject.Find("Canvas").GetComponent<GUI_MainManager>();
 		StartCoroutine(bulletIsOn(waitS));
 	}
 	
@@ -38,6 +40,7 @@ public class BulletEffect : MonoBehaviour {
 				musicHandler.playSound(player.mMusicModel.hitBall);
 			} else {
 				musicHandler.playSound(catchAudio);
+				guiManager.addScore(1);
 			}
 			Destroy(gameObject);
 		}

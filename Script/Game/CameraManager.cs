@@ -7,11 +7,13 @@ namespace Game {
 		public GameObject followObject;
 		public float maxXOffset = -5;
 		public int cameraSpeed = 0;
+		private GameManager gameManager;
 		float screenWidth;
 		float camX = 0;
 		
 		void Start      () {
 			screenWidth = GetViewSizeAtDistance(Mathf.Abs(followObject.transform.position.z - transform.position.z)).x;
+			gameManager = Camera.main.GetComponent<GameManager>();
 		}
 		void FixedUpdate () {
 			if (followObject.transform.position.x < camX - screenWidth / 2) {
@@ -19,7 +21,7 @@ namespace Game {
 //				followObject.transform.position = new Vector3(0, 9, 0);
 //				transform.position = new Vector3(0, 9, transform.position.z);
 //				camX = 0;
-				Application.LoadLevel(Application.loadedLevel);
+				gameManager.gameOver();
 			}
 			
 			camX += GetSpeed() * Time.deltaTime;

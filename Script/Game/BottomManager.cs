@@ -12,6 +12,7 @@ public class BottomManager : MonoBehaviour {
 	public float        heightVariance = 4;
 	public float        cliffChance = 0.1f;
 
+	private GUI_MainManager guiManager;
 	private EnemyAIManager aiManager;
 	private bool firstBuild = true;
 	Ferr2DT_PathTerrain terrain;
@@ -22,6 +23,7 @@ public class BottomManager : MonoBehaviour {
 	void Start  () {
 		terrain = GetComponent<Ferr2DT_PathTerrain>();
 		aiManager = Camera.main.GetComponent<EnemyAIManager>();
+		guiManager = GameObject.Find("Canvas").GetComponent<GUI_MainManager>();
 		terrainHeights          = new List<float>();
 		terrainSecondaryHeights = new List<float>();
 		for (int i = 0; i < vertCount; i++) {
@@ -91,6 +93,8 @@ public class BottomManager : MonoBehaviour {
 		
 		if (!firstBuild) {
 			aiManager.refresh(centerAround.transform.position);
+			guiManager.addScore(1);
+
 		}
 
 		terrainHeights         .Add(right );

@@ -6,16 +6,29 @@ namespace Game {
 		GameObject Bottom;
 		PlayerManager player;
 		CameraManager camera;
+		GUI_MainManager guiManager;
 		public bool gameOn  = false;
 
 
 
 		// Use this for initialization
 		void Start () {
+			guiManager = GameObject.Find("Canvas").GetComponent<GUI_MainManager>();
+
 			Bottom = GameObject.Find("Bottom");
 			player = GameObject.Find("Player").GetComponent<PlayerManager>();
 			camera = gameObject.GetComponent<CameraManager>();
 			PlayerReposition();
+		}
+
+		public void gameOver() {
+			int pastScore = PlayerPrefs.GetInt("HighScore", 0);
+
+			if (pastScore < guiManager.score) {
+				PlayerPrefs.SetInt("HighScore", guiManager.score);
+			}
+
+			Application.LoadLevel(Application.loadedLevel);
 		}
 
 		public void gameStart() {

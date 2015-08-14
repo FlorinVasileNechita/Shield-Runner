@@ -33,7 +33,8 @@ namespace Game {
 		public MusicModel mMusicModel;
 
 		private TrailRenderer mTrailRenderer;
-		private float shieldChangePoint = -0.5f;
+		private GUI_MainManager guiManager;
+		public float shieldChangePoint;
 		private Sprite[] shieldSprites;
 		delegate void ShieldMethod();
 		ShieldMethod shieldHandler;
@@ -49,11 +50,12 @@ namespace Game {
 			mAnim = GetComponent<Animator>();
 			shieldDeviceDetector();
 			shieldSprites = Resources.LoadAll<Sprite>("Game/shields");
+			guiManager = GameObject.Find("Canvas").GetComponent<GUI_MainManager>();
 		}
 
 		void Update() {
+			shieldHandler();
 			if (currentStatus != Status.Idle) {
-				shieldHandler();
 				if (Input.GetMouseButtonDown(0)) Jump();
 			}
 		}
@@ -133,6 +135,7 @@ namespace Game {
 					jumpNum = 0;
 					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, jumpPower);
 					boostSpeed();
+					guiManager.addScore(2);
 				}
 			}
 		}
@@ -150,8 +153,10 @@ namespace Game {
 		void mobileShieldHandler() {
 			if (Input.acceleration.y > shieldChangePoint) {
 				chanageShieldStatus("green");
+				guiManager.changeShield(Color.green);
 			} else {
 				chanageShieldStatus("red");
+				guiManager.changeShield(Color.white);
 			}
 		}
 		

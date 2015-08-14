@@ -7,6 +7,8 @@ public class EnemyHandler : MonoBehaviour {
 	int attackPerPeriod = 3;
 	int attackPattern = 8;
 	AttackMethod attackMethod;
+
+
 	// Use this for initialization
 	void Start () {
 		attackPattern = Random.Range(1, attackPattern);

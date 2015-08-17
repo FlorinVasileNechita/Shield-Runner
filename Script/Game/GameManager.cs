@@ -9,8 +9,6 @@ namespace Game {
 		GUI_MainManager guiManager;
 		public bool gameOn  = false;
 
-
-
 		// Use this for initialization
 		void Start () {
 			guiManager = GameObject.Find("Canvas").GetComponent<GUI_MainManager>();
@@ -37,13 +35,7 @@ namespace Game {
 			camera.cameraSpeed = 4;
 		}
 		
-		public void pause() {
-			
-		}
 		
-		public void resume() {
-			
-		}
 		void PlayerReposition() {
 			for (int i = -5; i < 10; i++) {
 				Vector2 basicPointA = new Vector2(player.transform.position.x, player.transform.position.y + i);

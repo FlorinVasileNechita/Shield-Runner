@@ -7,6 +7,7 @@ public class GUI_MainManager : MonoBehaviour {
 	public GameObject title;
 	public GameObject startButton;
 	public GameObject setting;
+	
 	private GameManager gameManager;
 	public int score = 0;
 	private int highScore;
@@ -17,6 +18,7 @@ public class GUI_MainManager : MonoBehaviour {
 	public GameObject highScoreText;
 	public GameObject accelerometerGameObject;
 	public GameObject accelerometerImage;
+	public GameObject settingPanel;
 	// Use this for initialization
 	void Start () {
 		gameManager = Camera.main.GetComponent<GameManager>();
@@ -28,6 +30,21 @@ public class GUI_MainManager : MonoBehaviour {
 	void Update() {
 
 	}
+	
+	public void pause() {
+		Time.timeScale = 0;
+		settingPanel.SetActive(true);
+		hideMainGUIPanel(false);	
+	}
+	
+	public void resume() {
+		Time.timeScale = 1;
+		settingPanel.SetActive(false);
+		if (!gameManager.gameOn) {
+			hideMainGUIPanel(true);
+		}
+	}
+	
 
 	private void showHighScore() {
 		highScoreText.GetComponent<Text>().text = PlayerPrefs.GetInt("HighScore", 0).ToString();
@@ -45,7 +62,7 @@ public class GUI_MainManager : MonoBehaviour {
 	}
 
 	public void changeShield(Color color) {
-		accelerometerImage.GetComponent<Image>().color = color;
+		accelerometerImage.GetComponent<Text>().color = color;
 	}
 
 	public void addScore(int i) {
@@ -53,11 +70,16 @@ public class GUI_MainManager : MonoBehaviour {
 		scoreText.GetComponent<Text>().text = score.ToString();
 	}
 
+	private void hideMainGUIPanel(bool hide) {
+		title.SetActive(hide);
+		startButton.SetActive(hide);
+		highScoreGameobject.SetActive(hide);
+		highScoreText.SetActive(hide);
+		
+	}
+
 	public void gui_startGame() {
-		title.SetActive(false);
-		startButton.SetActive(false);
-		highScoreGameobject.SetActive(false);
-		highScoreText.SetActive(false);
+		hideMainGUIPanel(false);
 		gameManager.gameStart();
 	}
 }

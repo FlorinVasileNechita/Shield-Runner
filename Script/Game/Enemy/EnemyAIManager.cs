@@ -40,9 +40,15 @@ public class EnemyAIManager : MonoBehaviour {
 			if (enemy.gameObject.transform.position.x > player.transform.position.x ) return;			
 		}
 		int attackPattern = Random.Range(2, 5);
-		attackMethod.shootBullet(new Vector2(player.transform.position.x +45, player.transform.position.y+1.2f ), attackPattern);
+		attackMethod.shootBullet(Vector2.zero, attackPattern);
 	}
-	
+
+
+//	IEnumerator shootBullet(float waitS) {
+//		yield return new WaitForSeconds(waitS);
+//		attackMethod.shootBullet(new Vector2(player.transform.position.x +45, player.transform.position.y+1.2f ), attackPattern);
+//	}
+//	
 
 	private void generate(Vector2 centerPoint) {
 		float spawnSawRatio = Random.Range(0 , 15);

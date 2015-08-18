@@ -28,16 +28,14 @@ public class BulletEffect : MonoBehaviour {
 		on = true;
 		if (transform.position == Vector3.zero) {
 			transform.position = new Vector2 (player.transform.position.x + 26, player.transform.position.y+1);
+			checkCollision();
 		}
-
-		checkCollision();
 	}
 
 	private void checkCollision() {
-		RaycastHit2D[] hits = Physics2D.LinecastAll (new Vector2(transform.position.x - 0.4f,transform.position.y),
-		                                             new Vector2(transform.position.x + 0.4f,transform.position.y),
+		RaycastHit2D[] hits = Physics2D.LinecastAll (new Vector2(transform.position.x - 0.6f,transform.position.y),
+		                                             new Vector2(transform.position.x + 0.6f,transform.position.y),
 		                                             ConstantVariable.bulletLayer);
-		Debug.Log(hits.Length);
 		if (hits.Length > 1) {
 			Destroy(gameObject);
 		}

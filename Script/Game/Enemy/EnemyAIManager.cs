@@ -61,7 +61,7 @@ public class EnemyAIManager : MonoBehaviour {
 
 		//SpawnEnemy
 		if (spawnEnemyRatio < 6) {
-			spawn(centerPoint, false, monsterPrefab, 1.5f);
+			spawn(centerPoint, false, monsterPrefab, 1.3f);
 		}
 	}
 

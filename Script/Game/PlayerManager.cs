@@ -90,6 +90,7 @@ namespace Game {
 			mAnim.SetBool("BeHit", true);
 			StartCoroutine(ResumeRunStatus(stunTime));
 			mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 0);
+			guiManager.combo = 0;
 		}
 
 		public void bulletBlock() {

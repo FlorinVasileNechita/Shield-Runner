@@ -56,6 +56,7 @@ public class BulletEffect : MonoBehaviour {
 			} else {
 				musicHandler.playSound(catchAudio);
 				guiManager.addScore(1);
+				guiManager.addCombo();
 			}
 			Destroy(gameObject);
 		}

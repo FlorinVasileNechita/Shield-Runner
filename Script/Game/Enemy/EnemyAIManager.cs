@@ -9,11 +9,14 @@ public class EnemyAIManager : MonoBehaviour {
 	private GameObject barrierParent;
 	private AttackMethod attackMethod;
 
+	public GameObject redBullet;
+	public GameObject greenBullet;
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		buzzsawPrefab = Resources.Load<GameObject>("Game/buzzsaw");
-		monsterPrefab = Resources.Load<GameObject>("Game/Test/Enemy");
+		monsterPrefab = Resources.Load<GameObject>("Game/Enemy");
 		barrierParent = GameObject.Find("Barriers");
 		attackMethod = gameObject.AddComponent<AttackMethod>();
 	}
@@ -35,12 +38,12 @@ public class EnemyAIManager : MonoBehaviour {
 	}
 
 	private void remoteAttacker() {
-		EnemyHandler[] enemys = barrierParent.GetComponentsInChildren<EnemyHandler>();	
-		foreach (EnemyHandler enemy in enemys) {
-			if (enemy.gameObject.transform.position.x > player.transform.position.x ) return;			
-		}
-		int attackPattern = Random.Range(2, 5);
-		attackMethod.shootBullet(Vector2.zero, attackPattern);
+//		EnemyHandler[] enemys = barrierParent.GetComponentsInChildren<EnemyHandler>();	
+//		foreach (EnemyHandler enemy in enemys) {
+//			if (enemy.gameObject.transform.position.x > player.transform.position.x ) return;			
+//		}
+//		int attackPattern = Random.Range(2, 5);
+//		attackMethod.shootBullet(Vector2.zero, attackPattern);
 	}
 
 
@@ -78,7 +81,7 @@ public class EnemyAIManager : MonoBehaviour {
 	public void refresh(Vector2 centerPoint) {
 		generate(centerPoint);
 		delete(centerPoint);
-		remoteAttacker();
+		//remoteAttacker();
 	}
 	
 	

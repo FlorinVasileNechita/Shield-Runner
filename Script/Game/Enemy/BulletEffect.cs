@@ -10,16 +10,13 @@ public class BulletEffect : MonoBehaviour {
 	GUI_MainManager guiManager;
 	Game.PlayerManager player;
 
-	public void bulletStart(float waitS, Color color) {
+	public void bulletStart(float waitS, string color) {
 		Destroy(gameObject, 8);
-		gameObject.GetComponent<MeshRenderer>().material.color = color;
-		bulletColor = (color == Color.red) ? "red" : "green";
+		bulletColor = color;
 		catchAudio = Resources.Load<AudioClip>("Music/Game/catch_" + bulletColor);
 		musicHandler = GameObject.Find("Barriers").GetComponent<MusicHandler>();
 		guiManager = GameObject.Find("Canvas").GetComponent<GUI_MainManager>();
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Game.PlayerManager>();
-		gameObject.SetActive(true);
-
 		StartCoroutine(bulletIsOn(waitS));
 	}
 	
@@ -33,8 +30,8 @@ public class BulletEffect : MonoBehaviour {
 	}
 
 	private void checkCollision() {
-		RaycastHit2D[] hits = Physics2D.LinecastAll (new Vector2(transform.position.x - 0.6f,transform.position.y),
-		                                             new Vector2(transform.position.x + 0.6f,transform.position.y),
+		RaycastHit2D[] hits = Physics2D.LinecastAll (new Vector2(transform.position.x - 1f,transform.position.y),
+		                                             new Vector2(transform.position.x + 1f,transform.position.y),
 		                                             ConstantVariable.bulletLayer);
 		if (hits.Length > 1) {
 			Destroy(gameObject);

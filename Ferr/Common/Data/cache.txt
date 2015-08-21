@@ -419,6 +419,9 @@ Assets/Scene/Back Terrain.prefab
 Assets/Resources/Game/Test/Enemy.prefab
 Assets/Resources/Game/Test/Bullet.prefab
 Assets/ODU/Resources/ODU.prefab
+Assets/Resources/Game/red_bullet.prefab
+Assets/Resources/Game/green_bullet.prefab
+Assets/Resources/Game/Enemy.prefab
 
 [Ferr2DT_PathTerrain]
 Assets/Ferr/2DTerrain/TerrainMaterials/ForestTerrainMaterial.prefab
@@ -840,3 +843,6 @@ Assets/Scene/Back Terrain.prefab
 Assets/Resources/Game/Test/Enemy.prefab
 Assets/Resources/Game/Test/Bullet.prefab
 Assets/ODU/Resources/ODU.prefab
+Assets/Resources/Game/red_bullet.prefab
+Assets/Resources/Game/green_bullet.prefab
+Assets/Resources/Game/Enemy.prefab

@@ -16,7 +16,7 @@ public class AttackMethod : MonoBehaviour {
 		for (int i = 0; i < attackPattern; i++) {
 			Color color = (Random.Range(0,10) >= 5) ? Color.green : Color.red;
 			GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity) as GameObject;
-			bullet.GetComponent<BulletEffect>().bulletStart(acutalAttackPeriod, color);
+//			bullet.GetComponent<BulletEffect>().bulletStart(acutalAttackPeriod, color);
 			acutalAttackPeriod += attackPeriod;
 		}
 	}

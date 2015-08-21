@@ -604,7 +604,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 32b3f3b958c8144c5852d30588cc6754, type: 2}
+  - {fileID: 2100000, guid: a4a0546cc34f9de4fb37c5e3986cfb91, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -982,10 +982,15 @@ MonoBehaviour:
   mAnim: {fileID: 0}
   mRigidBody: {fileID: 0}
   mBoxCollider: {fileID: 0}
+  gameManager: {fileID: 0}
   greenShield: {fileID: 167362}
   landParticle: {fileID: 0}
   jumpParticle: {fileID: 189890}
   shieldParticle: {fileID: 186102}
+  boostdParticle: {fileID: 0}
+  mMusicHanlder: {fileID: 0}
+  mMusicModel: {fileID: 0}
+  shieldChangePoint: 0
 --- !u!114 &11494392
 MonoBehaviour:
   m_ObjectHideFlags: 1

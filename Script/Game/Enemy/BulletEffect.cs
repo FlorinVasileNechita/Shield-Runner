@@ -40,7 +40,7 @@ public class BulletEffect : MonoBehaviour {
 	// Update is called once per fram
 	void Update () {
 		if (on) {
-			transform.Translate(-transform.right * bulletSpeed * Time.deltaTime);
+			transform.position += (Vector3.left * bulletSpeed * Time.deltaTime);
 		}
 	}
 	

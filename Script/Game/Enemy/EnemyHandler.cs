@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyHandler : MonoBehaviour {
 	int speed;	
 	BoxCollider2D mBoxCollider;
-	int attackPerPeriod = 3;
+	int attackPerPeriod = 4;
 	int attackPattern = 8;
 	int numAttack;
 	EnemyAIManager aiManager;
@@ -28,14 +28,14 @@ public class EnemyHandler : MonoBehaviour {
 
 
 	void goIdle() {
-		anim.SetBool("isIdle", false);
+		anim.SetBool("isIdle", true);
 		numAttack = 0;
 		StartCoroutine(resumeAttack());
 	}
 
 	IEnumerator resumeAttack() {
 		yield return new WaitForSeconds(attackPerPeriod);
-		anim.SetBool("isIdle", true);
+		anim.SetBool("isIdle", false);
 	}
 
 	void getNextBullet() {

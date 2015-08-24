@@ -19,10 +19,10 @@ public class EnemyAIManager : MonoBehaviour {
 	}
 
 	private void spawn(Vector2 centerPoint, bool isBuzzsaw, GameObject prefab, float radio) {
-		int spawnDistance = 22;
-		int additionDistance = Random.Range(2, 7);
-		if (!isBuzzsaw) centerPoint.x  += additionDistance;
-		for (int k = -9; k <= 10; k ++) {
+		int spawnDistance = 20;
+		int additionDistance = Random.Range(0, 7);
+			centerPoint.x  += additionDistance;
+		for (float k = -9; k <= 10; k += 0.5f) {
 			Vector2 basicPointA = new Vector2(centerPoint.x + spawnDistance, centerPoint.y + k);
 			
 			if (!Physics2D.OverlapCircle(basicPointA, radio, ConstantVariable.platformLayer) &&
@@ -46,8 +46,8 @@ public class EnemyAIManager : MonoBehaviour {
 	}
 
 	private void generate(Vector2 centerPoint) {
-		float spawnSawRatio = Random.Range(0 , 15);
-		float spawnEnemyRatio = Random.Range(0 , 12);
+		float spawnSawRatio = Random.Range(0 , 20);
+		float spawnEnemyRatio = Random.Range(0 , 15);
 
 		//SpawnSaw
 		if (spawnSawRatio < 6) {

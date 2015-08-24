@@ -1889,7 +1889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!82 &1519921657
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2013,8 +2013,9 @@ Animation:
   m_GameObject: {fileID: 1529118233}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: ef00c7c5a649caa4d98e392259f83dd5, type: 2}
-  m_Animations: []
+  m_Animation: {fileID: 7400000, guid: 773a55b25145ddf49bd666efd9fdf8c4, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 773a55b25145ddf49bd666efd9fdf8c4, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -2031,7 +2032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 91529ed5c996a4687b589fdac15ba868, type: 3}
     m_FontSize: 31
@@ -3086,8 +3087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5be44b4c65deec45b81994e064a4a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redBullet: {fileID: 189164, guid: 158b871cf2352234797f250deb36522b, type: 2}
-  greenBullet: {fileID: 178110, guid: dabf9bf7083012e4abda04e42f79f353, type: 2}
+  attackMethod: {fileID: 0}
 --- !u!82 &2135106162
 AudioSource:
   m_ObjectHideFlags: 0

@@ -21,7 +21,6 @@ public class GUI_MainManager : MonoBehaviour {
 	public GameObject settingPanel;
 	public GameObject comboObject;
 	public int combo;
-	private float comboTime;
 	// Use this for initialization
 	void Start () {
 		gameManager = Camera.main.GetComponent<GameManager>();
@@ -73,16 +72,10 @@ public class GUI_MainManager : MonoBehaviour {
 	}
 
 	public void addCombo() {
-		float comboMaxTime = 3;
-		if (Time.time < comboTime) {
 			combo++;
 			comboObject.GetComponent<Text>().text = "x "+combo.ToString();
 			comboObject.GetComponent<Animation>().Stop();
 			comboObject.GetComponent<Animation>().Play();
-		} else {
-			combo = 0;
-		}
-		comboTime = Time.time + comboMaxTime;
 	}
 
 	private void hideMainGUIPanel(bool hide) {

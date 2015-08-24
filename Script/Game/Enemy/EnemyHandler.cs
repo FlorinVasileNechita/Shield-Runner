@@ -9,7 +9,12 @@ public class EnemyHandler : MonoBehaviour {
 	int numAttack;
 	EnemyAIManager aiManager;
 	SkeletonAnimation skeletonAnimation;
+	GameObject nextBullet;
 	Animator anim;
+	public GameObject redSign;
+	public GameObject greenSign;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +23,7 @@ public class EnemyHandler : MonoBehaviour {
 		anim = GetComponent<Animator>();
 		mBoxCollider = GetComponent<BoxCollider2D>();
 		skeletonAnimation = GetComponent<SkeletonAnimation>();
+		nextBullet = aiManager.attackMethod.getRandomBullet();
 	}
 
 
@@ -31,22 +37,26 @@ public class EnemyHandler : MonoBehaviour {
 		yield return new WaitForSeconds(attackPerPeriod);
 		anim.SetBool("isIdle", true);
 	}
+
+	void getNextBullet() {
+		nextBullet = aiManager.attackMethod.getRandomBullet();
+		string color = nextBullet.GetComponent<BulletEffect>().bulletColor;
+
+		if (color == "green") {
+			greenSign.GetComponent<SpriteRenderer>().enabled = true;
+			redSign.GetComponent<SpriteRenderer>().enabled = false;
+		} else {
+			greenSign.GetComponent<SpriteRenderer>().enabled = false;
+			redSign.GetComponent<SpriteRenderer>().enabled = true;
+		}
+	}
 	
 	void Fire() {
 		if ( numAttack < attackPattern) {
-			Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y+0.5f);
-			GameObject ballObject;
-			string color;
-
-			if (Random.Range(0,10) >= 5) {
-				ballObject = aiManager.greenBullet;
-				color = "green";
-			} else {
-				ballObject = aiManager.redBullet;
-				color = "red";
-			}
-			GameObject bullet = Instantiate(ballObject, spawnPosition, Quaternion.identity) as GameObject;
-			bullet.GetComponent<BulletEffect>().bulletStart(0, color);
+			Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y+1);
+			aiManager.attackMethod.shootBullet(spawnPosition, 0, nextBullet);
+			numAttack++;
+			getNextBullet();
 		} else {
 			goIdle();
 		}

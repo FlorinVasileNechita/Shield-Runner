@@ -2,17 +2,16 @@
 using System.Collections;
 
 public class BulletEffect : MonoBehaviour {
+	public string bulletColor;
 	int bulletSpeed = 7;
 	bool on = false;
 	AudioClip catchAudio;
-	string bulletColor;
 	MusicHandler musicHandler;
 	GUI_MainManager guiManager;
 	Game.PlayerManager player;
 
-	public void bulletStart(float waitS, string color) {
+	public void bulletStart(float waitS) {
 		Destroy(gameObject, 8);
-		bulletColor = color;
 		catchAudio = Resources.Load<AudioClip>("Music/Game/catch_" + bulletColor);
 		musicHandler = GameObject.Find("Barriers").GetComponent<MusicHandler>();
 		guiManager = GameObject.Find("Canvas").GetComponent<GUI_MainManager>();
@@ -30,8 +29,8 @@ public class BulletEffect : MonoBehaviour {
 	}
 
 	private void checkCollision() {
-		RaycastHit2D[] hits = Physics2D.LinecastAll (new Vector2(transform.position.x - 1f,transform.position.y),
-		                                             new Vector2(transform.position.x + 1f,transform.position.y),
+		RaycastHit2D[] hits = Physics2D.LinecastAll (new Vector2(transform.position.x - 2f,transform.position.y),
+		                                             new Vector2(transform.position.x + 2f,transform.position.y),
 		                                             ConstantVariable.bulletLayer);
 		if (hits.Length > 1) {
 			Destroy(gameObject);
@@ -50,6 +49,7 @@ public class BulletEffect : MonoBehaviour {
 			if (player.currentShieldStatus != bulletColor) {
 				player.damage();
 				musicHandler.playSound(player.mMusicModel.hitBall);
+				guiManager.combo = 0;
 			} else {
 				musicHandler.playSound(catchAudio);
 				guiManager.addScore(1);

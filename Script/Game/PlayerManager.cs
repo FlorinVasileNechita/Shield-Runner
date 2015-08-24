@@ -130,14 +130,12 @@ namespace Game {
 		}
 
 
-		void OnCollisionEnter2D(Collision2D coll) {
-			if (coll.gameObject.tag == "Enemy") {
-				if (currentStatus == Status.Jump) {
+		void OnTriggerEnter2D(Collider2D coll) {
+			if (coll.gameObject.tag == "Enemy" && currentStatus == Status.Jump && mRigidBody.velocity.y < 0) {
 					jumpNum = 0;
 					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, jumpPower);
 					boostSpeed();
 					guiManager.addScore(2);
-				}
 			}
 		}
 

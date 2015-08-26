@@ -21,16 +21,14 @@ public class GUI_MainManager : MonoBehaviour {
 	public GameObject settingPanel;
 	public GameObject comboObject;
 	public int combo;
+	private WebManager webManager;
 	// Use this for initialization
 	void Start () {
 		gameManager = Camera.main.GetComponent<GameManager>();
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
 		showHighScore();
+		webManager = new WebManager();
 		showAccelerometer();
-	}
-
-	void Update() {
-
 	}
 	
 	public void pause() {

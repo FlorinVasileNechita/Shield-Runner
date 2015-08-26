@@ -10,11 +10,13 @@ namespace Game {
 		PlayerManager player;
 		CameraManager camera;
 		GUI_MainManager guiManager;
+		WebManager webManager;
 		public bool gameOn  = false;
 	
 		void Awake() {
 			PlayGamesPlatform.DebugLogEnabled = true;
 			PlayGamesPlatform.Activate();
+			webManager = new WebManager();
 		}
 		
 		private void googlePlayLogin () 

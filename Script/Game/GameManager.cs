@@ -24,7 +24,7 @@ namespace Game {
 					string UserName  = Social.localUser.userName; // UserName
 					string UserID      = Social.localUser.id; // UserID
 					PlayerPrefs.SetString("name", UserName);
-					PlayerPrefs.SetInt("user_id", UserID);
+					PlayerPrefs.SetInt("user_id", int.Parse( UserID) );
 					
 					Debugger.Log(UserID +", " +UserName);
 				});

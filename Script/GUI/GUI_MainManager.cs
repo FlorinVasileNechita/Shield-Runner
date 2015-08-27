@@ -22,6 +22,8 @@ public class GUI_MainManager : MonoBehaviour {
 	public GameObject comboObject;
 	public int combo;
 	private WebManager webManager;
+	public GameObject rankPanel;
+
 	// Use this for initialization
 	void Start () {
 		gameManager = Camera.main.GetComponent<GameManager>();
@@ -81,7 +83,7 @@ public class GUI_MainManager : MonoBehaviour {
 		startButton.SetActive(hide);
 		highScoreGameobject.SetActive(hide);
 		highScoreText.SetActive(hide);
-		
+		rankPanel.SetActive(hide);
 	}
 
 	public void gui_startGame() {

@@ -6,7 +6,6 @@ namespace Game {
 	public class RaycastDetector : MonoBehaviour {
 		private StatusManager self; 
 		private Vector2 boxSize;
-		private bool testMode = true;
 		private float horizontalGap;
 		private float verticalGap;
 		private int raycastLine = 4;

@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class EnemyAIManager : MonoBehaviour {
-	private int spawnRatio = 6;
 	private GameObject buzzsawPrefab;
 	private GameObject monsterPrefab;
 	private GameObject player;

@@ -94,7 +94,6 @@ namespace Game {
 		}
 
 		public void bulletBlock() {
-			int boostBulletSecond = 3;
 			int maxBulletNum = 4;
 			bulletCatch++;
 			if (bulletTime > Time.time && bulletCatch >= maxBulletNum) {

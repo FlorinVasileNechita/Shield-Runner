@@ -10,13 +10,11 @@ namespace Game {
 		PlayerManager player;
 		CameraManager camera;
 		GUI_MainManager guiManager;
-		WebManager webManager;
+		
 		public bool gameOn  = false;
 	
 		void Awake() {
-			PlayGamesPlatform.DebugLogEnabled = true;
 			PlayGamesPlatform.Activate();
-			webManager = new WebManager();
 		}
 		
 		private void googlePlayLogin () 
@@ -26,9 +24,7 @@ namespace Game {
 					string UserName  = Social.localUser.userName; // UserName
 					string UserID      = Social.localUser.id; // UserID
 					PlayerPrefs.SetString("name", UserName);
-					PlayerPrefs.SetInt("user_id", 0 );
-					
-					Debugger.Log(UserID +", " +UserName);
+					PlayerPrefs.SetString("google_id", UserID );
 				});
 			}
 		}
@@ -51,6 +47,7 @@ namespace Game {
 
 			if (pastScore < guiManager.score) {
 				PlayerPrefs.SetInt("HighScore", guiManager.score);
+				new WebManager().saveHighScore();
 			}
 
 			Application.LoadLevel(Application.loadedLevel);

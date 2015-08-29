@@ -31,6 +31,9 @@ public class GUI_MainManager : MonoBehaviour {
 		showHighScore();
 		webManager = new WebManager();
 		showAccelerometer();
+		Text[] textArray = rankPanel.GetComponentsInChildren<Text>(); 
+		webManager.getTopTen(textArray[1]);
+		webManager.getIndividualScore();
 	}
 	
 	public void pause() {

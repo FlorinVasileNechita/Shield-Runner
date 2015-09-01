@@ -13,6 +13,7 @@ namespace Game {
 		public int speed = 5;
 		private int maxJumpNum = 2;
 		private float stunTime = 0.9f;
+		private float canMoveTime;
 		private int boosttime = 5;
 		private int boostStack;
 		
@@ -88,6 +89,7 @@ namespace Game {
 		public void damage() {
 			currentStatus = Status.BeHit;
 			mAnim.SetBool("BeHit", true);
+			canMoveTime = Time.time + stunTime;
 			StartCoroutine(ResumeRunStatus(stunTime));
 			mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, 0);
 			guiManager.combo = 0;
@@ -124,8 +126,10 @@ namespace Game {
 
 		IEnumerator ResumeRunStatus(float waitTime) {
 			yield return new WaitForSeconds(waitTime);
-			currentStatus = Status.Run;
-			mAnim.SetBool("BeHit", false);
+			if (Time.time >= canMoveTime) {
+				currentStatus = Status.Run;
+				mAnim.SetBool("BeHit", false);
+			}
 		}
 
 
@@ -134,7 +138,8 @@ namespace Game {
 					jumpNum = 0;
 					mRigidBody.velocity = new Vector2(mRigidBody.velocity.x, jumpPower);
 					boostSpeed();
-					guiManager.addScore(2);
+					guiManager.addScore(10);
+					guiManager.addCombo();
 			}
 		}
 

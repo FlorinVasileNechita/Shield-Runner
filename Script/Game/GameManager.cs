@@ -59,8 +59,28 @@ namespace Game {
 			camera.cameraSpeed = 4;
 		}
 		
-		
+		void positioning(GameObject targetObject ) {
+			for (float k = -9; k <= 10; k += 0.5f) {
+				Vector2 basicPointA = new Vector2(targetObject.transform.position.x, targetObject.transform.position.y  + k);
+				
+				if (!Physics2D.OverlapCircle(basicPointA, 1f, ConstantVariable.platformLayer) && 
+				    Physics2D.Linecast (basicPointA, new Vector2(basicPointA.x, basicPointA.y -1.5f), ConstantVariable.platformLayer)) {
+						targetObject.transform.position = basicPointA;
+						return;
+
+				}
+			}
+			Debug.Log("None");
+
+		}
+
+
 		void PlayerReposition() {
+			GameObject tutorialRed = GameObject.Find("tutorial_red");
+			GameObject tutorialGreen = GameObject.Find("tutorial_green");
+			positioning(tutorialGreen);
+			positioning(tutorialRed);
+
 			for (int i = -5; i < 10; i++) {
 				Vector2 basicPointA = new Vector2(player.transform.position.x, player.transform.position.y + i);
 

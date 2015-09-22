@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 [RequireComponent(typeof(Ferr2D_Path), typeof(Ferr2DT_PathTerrain))]
 public class InfiniteTerrain : MonoBehaviour {
@@ -15,6 +16,9 @@ public class InfiniteTerrain : MonoBehaviour {
     Ferr2DT_PathTerrain terrain;
     List<float>         terrainHeights;
     List<float>         terrainSecondaryHeights;
+	List<float>         terrainHeightsRecord = new List<float>();
+	List<float>         terrainSecondaryHeightsRecord = new List<float>();
+
     int                 currentOffset;
     
 	void Start  () {
@@ -82,6 +86,8 @@ public class InfiniteTerrain : MonoBehaviour {
 
         terrainHeights         .Add(right );
         terrainSecondaryHeights.Add(right2);
+		terrainHeightsRecord.Add(right );
+		terrainSecondaryHeightsRecord.Add(right2);
     }
     void  NewLeft       () {
         float left = GetLeft();
@@ -102,4 +108,16 @@ public class InfiniteTerrain : MonoBehaviour {
         if (terrainHeights.Count <= 0) return minHeight + (maxHeight - minHeight) / 2;
         return Mathf.Clamp(terrainSecondaryHeights[0                       ] + (-1 + Random.value * 2) * heightVariance, minHeight, maxHeight);
     }
+
+	public string floatListToString(List<float> floatList) {
+		StringBuilder builder = new StringBuilder();
+		foreach (float f in floatList)
+		{
+			// Append each int to the StringBuilder overload.
+			builder.Append(f).Append(" ");
+		}
+		string result = builder.ToString();	
+		return result;
+	}
+
 }

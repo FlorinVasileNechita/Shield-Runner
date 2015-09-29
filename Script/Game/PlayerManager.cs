@@ -159,7 +159,7 @@ namespace Game {
 				guiManager.changeShield(Color.green);
 			} else {
 				chanageShieldStatus("red");
-				guiManager.changeShield(Color.white);
+				guiManager.changeShield(Color.red);
 			}
 		}
 		

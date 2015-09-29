@@ -30,7 +30,7 @@ public class WebManager {
 		JSONObject topten = new JSONObject(textList);
 		
 		foreach(JSONObject j in topten.list){
-			mTopTen.text += i + " " + j.GetField("name").str +"\n";
+			mTopTen.text += i + " " + j.GetField("name").str +" - "+ j.GetField("score").n + "\n";
 			i++;
 		}
 	}

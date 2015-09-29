@@ -28,12 +28,12 @@ public class TerrainRebuild : MonoBehaviour {
 		void Start  () {
 			terrain = GetComponent<Ferr2DT_PathTerrain>();
 			
-//			terrainHeights          = stringToFloatList(floatListString);
-//			terrainSecondaryHeights = stringToFloatList(floatListStringTwo);
+			terrainHeights          = stringToFloatList(floatListString);
+			terrainSecondaryHeights = stringToFloatList(floatListStringTwo);
 //			
-			for (int i = 0; i < vertCount; i++) {
-				NewRight();
-			}
+//			for (int i = 0; i < vertCount; i++) {
+//				NewRight();
+//			}
 			
 			RebuildTerrain();
 		}
@@ -49,8 +49,8 @@ public class TerrainRebuild : MonoBehaviour {
 			while (centerAround.transform.position.x > ((currentOffset+1) * vertSpacing)) {
 				currentOffset += 1;
 				NewRight();
-				terrainHeights         .RemoveAt(0);
-				terrainSecondaryHeights.RemoveAt(0);
+//				terrainHeights         .RemoveAt(0);
+//				terrainSecondaryHeights.RemoveAt(0);
 				updated = true;
 			}
 			
@@ -58,8 +58,8 @@ public class TerrainRebuild : MonoBehaviour {
 			while (centerAround.transform.position.x < ((currentOffset-1) * vertSpacing)) {
 				currentOffset -= 1;
 				NewLeft();
-				terrainHeights         .RemoveAt(terrainHeights         .Count - 1);
-				terrainSecondaryHeights.RemoveAt(terrainSecondaryHeights.Count - 1);
+//				terrainHeights         .RemoveAt(terrainHeights         .Count - 1);
+//				terrainSecondaryHeights.RemoveAt(terrainSecondaryHeights.Count - 1);
 				updated = true;
 			}
 			

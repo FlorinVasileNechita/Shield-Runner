@@ -5,7 +5,6 @@ namespace Game {
 	public class StatusManager : MonoBehaviour {
 		public RaycastDetector raycastDetector;
 		public PlayerManager playerManager;
-		private float maxClimbFallSpeed = -0.1f;
 		
 		void Start () {
 			raycastDetector = gameObject.AddComponent<RaycastDetector>();
